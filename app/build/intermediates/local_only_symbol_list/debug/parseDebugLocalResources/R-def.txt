@@ -13,9 +13,9 @@ drawable saturn
 drawable sun
 drawable uranus
 drawable venus
-id Button
+id bottEntrar
+id editTextText
 id listView
-id main
 layout activity_main
 mipmap ic_launcher
 mipmap ic_launcher_round
