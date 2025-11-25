@@ -2,7 +2,6 @@ package com.example.mariaclara;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -18,17 +17,25 @@ public class Mostra extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_mostra);
 
-        resultado=findViewById(R.id.Resultado);
+        resultado = findViewById(R.id.Resultado);
 
-        Intent i =getIntent();
-        Bundle b=i.getExtras();
+        // Recebe o Intent e os dados passados
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
 
-        assert b != null;
-        Double n =b.getDouble("n");
+        // Verifica se o Bundle não é nulo
+        assert bundle != null;
+        Double n = bundle.getDouble("n");
 
-        Double tabuada = (n*1), (n*2), (n*3), (n*4), (n*5), (n*6), (n*7) , (n*8) , (n*9) , (n*10);
+        // Utiliza StringBuilder para concatenar os resultados da tabuada
+        StringBuilder tabuada = new StringBuilder();
 
-        resultado.setText(Double.toString(tabuada));
+        // Usei 'j' no lugar de 'i' para evitar conflito
+        for (int j = 1; j <= 10; j++) {
+            tabuada.append(n).append(" x ").append(j).append(" = ").append(n * j).append("\n");
+        }
 
+        // Exibe o resultado na TextView
+        resultado.setText(tabuada.toString());
     }
 }
