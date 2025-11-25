@@ -1,4 +1,4 @@
-package com.example.aula2;
+package com.example.mariaclara;
 
 import android.os.Bundle;
 import android.widget.ArrayAdapter;

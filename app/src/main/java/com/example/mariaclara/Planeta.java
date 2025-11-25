@@ -3,8 +3,17 @@ package com.example.mariaclara;
 public class Planeta {
     String nome;
     int foto;
+
     public Planeta(String nome, int foto){
         this.nome = nome;
         this.foto = foto;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public int getFoto() {
+        return foto;
     }
 }

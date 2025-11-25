@@ -11,6 +11,7 @@ public class PlanetaController {
     }
 
     public void addPlaneta(Planeta planeta){
+        planetaDao.addPlaneta(planeta);  // Adicionando planeta ao DAO
     }
 
     public ArrayList<Planeta> getPlanetas(){
@@ -18,7 +19,7 @@ public class PlanetaController {
     }
 
     public ArrayList<String> getNomePlanetas(){
-        ArrayList<String> nomes = new ArrayList<String>();
+        ArrayList<String> nomes = new ArrayList<>();
         for(Planeta planeta : planetaDao.getPlanetas()){
             nomes.add(planeta.nome);
         }

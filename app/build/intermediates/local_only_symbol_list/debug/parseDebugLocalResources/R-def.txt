@@ -15,6 +15,7 @@ drawable uranus
 drawable venus
 id bottEntrar
 id editTextText
+id imageView
 id listView
 layout activity_main
 mipmap ic_launcher
