@@ -4,7 +4,12 @@ color black
 color white
 drawable ic_launcher_background
 drawable ic_launcher_foreground
+id b
+id editNome
+id editemail
+id lista
 id main
+id nascimento
 layout activity_main
 mipmap ic_launcher
 mipmap ic_launcher_round

@@ -1,45 +1,103 @@
 package com.example.mariaclara;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.ContentValues;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+import com.example.mariaclara.R;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-    SQLiteDatabase db;
-    Button b;
+    SQLiteDatabase database;
+    EditText editTextNome, editTextEmail, editTextDataNasc;
+    Button button;
+    ListView ListView;
+    ArrayList<Integer> ids;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
+        //Associar variavis locais a views da interface
+        editTextNome = findViewById(R.id.editNome);
+        editTextEmail = findViewById(R.id.editemail);
+        editTextDataNasc = findViewById(R.id.nascimento);
+        button = findViewById(R.id.b);
+        ListView = findViewById(R.id.lista);
+        ids = new ArrayList<>();
+
+        //defininfo tratamnto para evento e click
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String nome = editTextNome.getText().toString();
+                String email = editTextEmail.getText().toString();
+                ContentValues cv = new ContentValues();
+                cv.put("nome", nome);
+                cv.put("email", email);
+
+                long status = database.insert("pessoas", null, cv);
+                if (status>0){
+                    Toast.makeText(getApplicationContext(), "Deu boa", Toast.LENGTH_LONG).show();
+                    limparCampos();
+                } else {
+                    Toast.makeText(getApplicationContext(), "Deu ruim", Toast.LENGTH_LONG).show();
+                }
+                carregarListagem();
+            }
         });
-        db = openOrCreateDatabase("app_database", MODE_PRIVATE,null);
-        db.execSQL("CREATE TABLE if not exists notas(id INTEGER PRIMARY KEY AUTOINCREMENT," +
-                "titulo VARCHAR, texto TEXT)");
-        ContentValues values = new ContentValues();
-        values.put("titulo", "mi primeira nota");
-        db.insert("notas",null,values);
-        b=findViewById(R.id.button);
-        b.setOnClickListener(v -> {;
-        EditText editText = findViewById(R.id.editTextText);
-        String texto = editText.getText().toString();
-        ContentValues cv = new ContentValues();
-        cv.put("titulo", "nota do usuario");
-        cv.put("texto", texto);
-        db.insert("notas", null, cv);
-        Toast.makeText("nota salva com sucesso!", Toast.LENGTH_SHORT).show();
+
+        database = openOrCreateDatabase("meubd", MODE_PRIVATE, null);
+        database.execSQL("CREATE TABLE IF NOT EXISTS pessoas (id INTEGER PRIMARY KEY AUTOINCREMENT,nome varchar, email varchar, datanasc Date)");
+        carregarListagem();
+        ListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                int itemId = ids.get(position);
+                carregarDados(itemId);
+            }
+        });
+    }
+
+    public void carregarListagem(){
+        Cursor cursor = database.rawQuery("SELECT * FROM pessoas ", null);
+        cursor.moveToFirst();
+        ArrayList<String> nomes = new ArrayList<>();
+        ids.clear();
+
+        while (!cursor.isAfterLast()){
+            nomes.add(cursor.getString(1));
+            ids.add(cursor.getInt(0));
+            cursor.moveToNext();
+        }
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, android.R.id.text1, nomes);
+        ListView.setAdapter(adapter);
+    }
+
+    private void carregarDados(int id) {
+        Cursor cursor = database.rawQuery("SELECT * FROM pessoas WHERE id = ?", new String[]{String.valueOf(id)});
+        if (cursor.moveToFirst()) {
+            editTextNome.setText(cursor.getString(1)); // Nome
+            editTextEmail.setText(cursor.getString(2)); // Email
+        }
+        cursor.close();
+    }
+
+    private void limparCampos() {
+        editTextNome.setText("");
+        editTextEmail.setText("");
+        editTextDataNasc.setText("");
     }
 }
