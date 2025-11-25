@@ -3204,6 +3204,7 @@ id beginning
 id below
 id bestChoice
 id blocking
+id botao
 id bottom
 id bounce
 id bounceBoth
@@ -3380,8 +3381,10 @@ id material_timepicker_ok_button
 id material_timepicker_view
 id material_value_index
 id matrix
+id max
 id message
 id middle
+id min
 id mini
 id month_grid
 id month_navigation_bar
@@ -3562,6 +3565,7 @@ id textSpacerNoButtons
 id textSpacerNoTitle
 id textStart
 id textTop
+id textView
 id text_input_end_icon
 id text_input_error_icon
 id text_input_start_icon
