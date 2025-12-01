@@ -13,11 +13,14 @@ drawable saturn
 drawable sun
 drawable uranus
 drawable venus
-id bottEntrar
-id editTextText
 id imageView
-id listView
+id listview
+id main
+id textView
+id tvNomePlaneta
 layout activity_main
+layout activity_planeta
+layout item_lista
 mipmap ic_launcher
 mipmap ic_launcher_round
 string Hello

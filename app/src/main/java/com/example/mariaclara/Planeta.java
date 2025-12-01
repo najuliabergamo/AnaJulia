@@ -1,19 +1,20 @@
 package com.example.mariaclara;
 
-public class Planeta {
+import android.graphics.Bitmap;
+
+import java.io.Serializable;
+
+public class Planeta implements Serializable {
+
+    // Guarda o nome do planeta
     String nome;
-    int foto;
 
-    public Planeta(String nome, int foto){
-        this.nome = nome;
-        this.foto = foto;
-    }
+    // Guarda o ID da imagem que está na pasta drawable (R.drawable.nome)
+    Integer imagem; // São recursos da pasta drawable R.drawable.nome
 
-    public String getNome() {
-        return nome;
-    }
-
-    public int getFoto() {
-        return foto;
+    // Construtor: usado para criar um planeta com nome e imagem
+    public Planeta(String nome, Integer imagem) {
+        this.nome = nome; // Recebe o nome e salva na variável
+        this.imagem = imagem; // Recebe o ID da imagem e salva
     }
 }

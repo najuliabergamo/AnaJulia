@@ -1,28 +1,42 @@
 package com.example.mariaclara;
 
-import java.util.ArrayList;
+import android.os.Bundle;
+import android.widget.ImageView;
+import android.widget.TextView;
 
-public class PlanetaController {
+import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 
-    PlanetaDao planetaDao;
+import com.example.mariaclara.Planeta;
+import com.example.mariaclara.R;
 
-    public PlanetaController(){
-        planetaDao = new PlanetaDao();
-    }
+public class PlanetaController extends AppCompatActivity {
 
-    public void addPlaneta(Planeta planeta){
-        planetaDao.addPlaneta(planeta);  // Adicionando planeta ao DAO
-    }
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
-    public ArrayList<Planeta> getPlanetas(){
-        return planetaDao.getPlanetas();
-    }
+        // Ativa o modo EdgeToEdge (conteúdo ocupa a tela toda)
+        EdgeToEdge.enable(this);
 
-    public ArrayList<String> getNomePlanetas(){
-        ArrayList<String> nomes = new ArrayList<>();
-        for(Planeta planeta : planetaDao.getPlanetas()){
-            nomes.add(planeta.nome);
-        }
-        return nomes;
+        // Carrega o layout da tela de detalhes do planeta
+        setContentView(R.layout.activity_planeta);
+
+        // Recupera os dados que vieram da Intent (extras)
+        Bundle bundle = getIntent().getExtras();
+
+        // Pega o planeta enviado pela MainActivity e converte para tipo Planeta
+        Planeta p = (Planeta) bundle.getSerializable("planeta"); // desserializa o objeto
+
+        // Liga as variáveis aos componentes do layout XML
+        ImageView imageView = findViewById(R.id.imageView); // Imagem do planeta
+        TextView textView = findViewById(R.id.tvNomePlaneta); // Nome do planeta
+
+        // Coloca os dados do planeta na tela
+        imageView.setImageResource(p.imagem); // Mostra a imagem do drawable
+        textView.setText(p.nome); // Mostra o nome do planeta
     }
 }

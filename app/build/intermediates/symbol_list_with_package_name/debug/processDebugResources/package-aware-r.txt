@@ -3213,7 +3213,6 @@ id beginning
 id below
 id bestChoice
 id blocking
-id bottEntrar
 id bottom
 id bounce
 id bounceBoth
@@ -3292,7 +3291,6 @@ id easeInOut
 id easeOut
 id east
 id edge
-id editTextText
 id edit_query
 id edit_text_id
 id elastic
@@ -3364,9 +3362,10 @@ id line1
 id line3
 id linear
 id listMode
-id listView
 id list_item
+id listview
 id m3_side_sheet
+id main
 id marquee
 id masked
 id match_constraint
@@ -3574,6 +3573,7 @@ id textSpacerNoButtons
 id textSpacerNoTitle
 id textStart
 id textTop
+id textView
 id text_input_end_icon
 id text_input_error_icon
 id text_input_start_icon
@@ -3602,6 +3602,7 @@ id transition_position
 id transition_scene_layoutid_cache
 id transition_transform
 id triangle
+id tvNomePlaneta
 id unchecked
 id uniform
 id unlabeled
@@ -3742,6 +3743,7 @@ layout abc_search_view
 layout abc_select_dialog_material
 layout abc_tooltip
 layout activity_main
+layout activity_planeta
 layout custom_dialog
 layout design_bottom_navigation_item
 layout design_bottom_sheet_dialog
@@ -3760,6 +3762,7 @@ layout design_text_input_end_icon
 layout design_text_input_start_icon
 layout ime_base_split_test_activity
 layout ime_secondary_split_test_activity
+layout item_lista
 layout m3_alert_dialog
 layout m3_alert_dialog_actions
 layout m3_alert_dialog_title

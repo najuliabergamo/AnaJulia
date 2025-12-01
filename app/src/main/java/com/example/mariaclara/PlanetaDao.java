@@ -1,28 +1,46 @@
 package com.example.mariaclara;
 
+import com.example.mariaclara.Planeta;
+import com.example.mariaclara.R;
+
 import java.util.ArrayList;
 
 public class PlanetaDao {
 
-    ArrayList<Planeta> arrayListPlaneta;
+    // Lista que vai guardar todos os planetas
+    ArrayList<Planeta> planetas;
 
-    public PlanetaDao(){
-        arrayListPlaneta = new ArrayList<>();
-        arrayListPlaneta.add(new Planeta("Mercúrio", R.drawable.mercury));
-        arrayListPlaneta.add(new Planeta("Vênus", R.drawable.venus));
-        arrayListPlaneta.add(new Planeta("Terra", R.drawable.earth));
-        arrayListPlaneta.add(new Planeta("Marte", R.drawable.mars));
-        arrayListPlaneta.add(new Planeta("Jupiter", R.drawable.jupter));
-        arrayListPlaneta.add(new Planeta("Saturno", R.drawable.saturn));
-        arrayListPlaneta.add(new Planeta("Urano", R.drawable.uranus));
-        arrayListPlaneta.add(new Planeta("Netuno", R.drawable.neptune));
+    // Construtor: cria a lista e preenche com planetas padrão
+    public PlanetaDao() {
+
+        this.planetas = new ArrayList<>(); // Inicializa a lista vazia
+
+        // Vetor com os nomes dos planetas
+        String[] nomes = new String[] {
+                "Mercurio", "Venus", "Terra", "Marte",
+                "Jupter", "Saturno", "Urano", "Netuno"
+        };
+
+        // Vetor com os IDs das imagens que estão na pasta drawable
+        Integer[] imagens = new Integer[] {
+                R.drawable.mercury, R.drawable.venus,
+                R.drawable.earth, R.drawable.mars,
+                R.drawable.jupter, R.drawable.saturn,
+                R.drawable.uranus, R.drawable.neptune
+        };
+
+        // Loop que percorre os vetores e cria um planeta para cada posição
+        for (int i = 0; i < nomes.length; i++) {
+
+            // Cria um novo planeta usando o nome e a imagem da posição atual
+            planetas.add(new Planeta(nomes[i], imagens[i]));
+
+            // Adiciona o planeta criado na lista planetas
+        }
     }
 
-    public ArrayList<Planeta> getPlanetas(){
-        return arrayListPlaneta;
-    }
-
-    public void addPlaneta(Planeta planeta){
-        arrayListPlaneta.add(planeta);  // Adiciona o planeta à lista
+    // Método que devolve a lista de planetas quando outra classe precisar
+    public ArrayList<Planeta> getPlatenas() {
+        return this.planetas; // Retorna todos os planetas cadastrados
     }
 }
